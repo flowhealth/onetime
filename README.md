@@ -47,18 +47,20 @@ var code = otp.TOTP(secret)
 C200 6-digit 60-second-step  TOTP code calculated with the current time 
 and the given secret and OTP value.Correct cloc skew +- 1 min
 ```go
-import (
-    "crypto/sha1"
-    "onetime"
-    "time"
-)
-
-var secret = []byte("SOME_SECRET")
-var step, _ = time.ParseDuration("60s")
-//var t = time.Date(2000, time.January, 1, 0, 0, 0, 0, time.UTC)
-otp = onetime.OneTimePassword{6, step, time.Unix(0, 0), sha1.New}
-//Return reslult bool and error 
-result,err:=otp.COTP(secret,TokenValue)
+	token := string("Token Digit")
+	secret, _ := hex.DecodeString("you hex encoded secret")
+	var step, _ = time.ParseDuration("60s")
+	otp := onetime.OneTimePassword{6, step, time.Unix(0, 0), sha1.New}
+	//Return reslult bool and error
+	result, err := otp.COTP(secret, token)
+	if err != nil {
+		fmt.Println("Otp error", err)
+	}
+	if !result {
+		fmt.Println("Auth failed")
+	} else {
+		fmt.Println("Auth succes")
+	}
 
 ```
 
