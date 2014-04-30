@@ -52,13 +52,14 @@ import (
     "onetime"
     "time"
 )
-TokenValuse=string("389484")
+
 var secret = []byte("SOME_SECRET")
 var step, _ = time.ParseDuration("60s")
-var t = time.Date(2000, time.January, 1, 0, 0, 0, 0, time.UTC)
+//var t = time.Date(2000, time.January, 1, 0, 0, 0, 0, time.UTC)
 otp = onetime.OneTimePassword{6, step, time.Unix(0, 0), sha1.New}
 //Return reslult bool and error 
 result,err:=otp.COTP(secret,TokenValue)
+
 ```
 
 
